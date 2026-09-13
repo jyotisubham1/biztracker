@@ -11,13 +11,13 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: #f5f5f5;
             color: #1a1a1a;
         }
-        
+
         .container {
             max-width: 480px;
             margin: 0 auto;
@@ -26,22 +26,22 @@
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
+
         .screen {
             display: none;
             padding: 20px;
             animation: slideIn 0.3s ease-out;
         }
-        
+
         .screen.active {
             display: block;
         }
-        
+
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -49,18 +49,18 @@
             text-align: center;
             border-radius: 0 0 20px 20px;
         }
-        
+
         .header h1 {
             font-size: 24px;
             margin-bottom: 5px;
             font-weight: 600;
         }
-        
+
         .header p {
             font-size: 13px;
             opacity: 0.9;
         }
-        
+
         .button {
             width: 100%;
             padding: 14px 20px;
@@ -73,47 +73,47 @@
             transition: all 0.3s ease;
             text-align: center;
         }
-        
+
         .button-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         .button-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-        
+
         .button-secondary {
             background: #f0f0f0;
             color: #333;
             border: 1px solid #ddd;
         }
-        
+
         .button-secondary:hover {
             background: #e8e8e8;
         }
-        
+
         .button-small {
             padding: 8px 12px;
             font-size: 14px;
             margin: 5px;
         }
-        
+
         .button-danger {
             background: #ff6b6b;
             color: white;
         }
-        
+
         .button-success {
             background: #51cf66;
             color: white;
         }
-        
+
         .input-group {
             margin: 15px 0;
         }
-        
+
         .input-group label {
             display: block;
             font-size: 14px;
@@ -121,7 +121,7 @@
             margin-bottom: 6px;
             color: #555;
         }
-        
+
         input[type="text"],
         input[type="number"] {
             width: 100%;
@@ -131,13 +131,13 @@
             font-size: 16px;
             font-family: inherit;
         }
-        
+
         input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
         .player-card {
             background: #f9f9f9;
             padding: 12px;
@@ -148,7 +148,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .balance-card {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
             padding: 20px;
@@ -157,17 +157,17 @@
             border: 1px solid #e0d5f0;
             text-align: center;
         }
-        
+
         .balance-card.bank {
             background: linear-gradient(135deg, rgba(51, 200, 100, 0.1) 0%, rgba(40, 150, 80, 0.1) 100%);
             border-color: #d5f0e0;
         }
-        
+
         .balance-card.negative {
             background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(200, 50, 50, 0.1) 100%);
             border-color: #f0d5d5;
         }
-        
+
         .balance-label {
             font-size: 12px;
             color: #888;
@@ -175,52 +175,52 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .balance-amount {
             font-size: 28px;
             font-weight: 700;
             color: #333;
         }
-        
+
         .balance-card.negative .balance-amount {
             color: #ff6b6b;
         }
-        
+
         .balance-card.bank .balance-amount {
             color: #2d9e5e;
         }
-        
+
         .transaction-item {
             padding: 12px;
             border-bottom: 1px solid #f0f0f0;
             font-size: 14px;
         }
-        
+
         .transaction-item:last-child {
             border-bottom: none;
         }
-        
+
         .transaction-from {
             font-weight: 500;
             color: #667eea;
         }
-        
+
         .transaction-amount {
             color: #ff6b6b;
             font-weight: 600;
         }
-        
+
         .transaction-to {
             font-weight: 500;
             color: #2d9e5e;
         }
-        
+
         .transaction-time {
             font-size: 12px;
             color: #999;
             margin-top: 4px;
         }
-        
+
         .modal-overlay {
             display: none;
             position: fixed;
@@ -234,11 +234,11 @@
             justify-content: center;
             overflow-y: auto;
         }
-        
+
         .modal-overlay.active {
             display: flex;
         }
-        
+
         .modal {
             background: white;
             padding: 24px;
@@ -249,18 +249,18 @@
             overflow-y: auto;
             margin: 20px 0;
         }
-        
+
         .modal-header {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 20px;
             color: #333;
         }
-        
+
         .select-group {
             margin: 15px 0;
         }
-        
+
         .select-group label {
             display: block;
             font-size: 14px;
@@ -268,7 +268,7 @@
             margin-bottom: 8px;
             color: #555;
         }
-        
+
         .radio-option {
             display: flex;
             align-items: center;
@@ -278,16 +278,16 @@
             cursor: pointer;
             border: 1px solid #ddd;
         }
-        
+
         .radio-option:hover {
             background: #f5f5f5;
         }
-        
+
         .radio-option input[type="radio"] {
             margin-right: 10px;
             cursor: pointer;
         }
-        
+
         .radio-option.selected {
             background: rgba(102, 126, 234, 0.1);
             border-color: #667eea;
@@ -319,7 +319,7 @@
             background: rgba(102, 126, 234, 0.1);
             border-color: #667eea;
         }
-        
+
         .summary-box {
             background: #f9f9f9;
             padding: 15px;
@@ -327,23 +327,23 @@
             margin: 15px 0;
             border-left: 4px solid #667eea;
         }
-        
+
         .summary-row {
             display: flex;
             justify-content: space-between;
             margin: 8px 0;
             font-size: 14px;
         }
-        
+
         .summary-label {
             color: #666;
         }
-        
+
         .summary-value {
             font-weight: 600;
             color: #333;
         }
-        
+
         .warning-box {
             background: #fff3cd;
             border: 1px solid #ffc107;
@@ -353,7 +353,7 @@
             font-size: 13px;
             color: #856404;
         }
-        
+
         .section-title {
             font-size: 14px;
             font-weight: 600;
@@ -362,18 +362,18 @@
             letter-spacing: 0.5px;
             margin: 20px 0 12px 0;
         }
-        
+
         .action-bar {
             display: flex;
             gap: 8px;
             margin-top: 15px;
         }
-        
+
         .action-bar .button {
             flex: 1;
             margin: 0;
         }
-        
+
         .close-btn {
             float: right;
             background: #f0f0f0;
@@ -587,7 +587,7 @@
                     <label>Player Name</label>
                     <input type="text" id="newPlayerName" placeholder="Enter player name">
                 </div>
-                
+
                 <div class="input-group">
                     <label>Starting Balance</label>
                     <input type="number" id="newPlayerBalance" value="5000" placeholder="5000">
@@ -671,7 +671,7 @@
         <div class="modal">
             <button class="close-btn" onclick="closeTransactionModal()">×</button>
             <div class="modal-header">Record Payment</div>
-            
+
             <!-- Mode Toggle: Single vs Bulk -->
             <div class="mode-toggle">
                 <button class="active" onclick="setTransactionMode('single')" id="singleModeBtn">
@@ -725,18 +725,37 @@
 
             <!-- BULK MODE -->
             <div id="bulkMode" style="display: none;">
+                <!-- Bulk Mode Type Selector -->
+                <div class="mode-toggle" style="background: #f5f5f5; display: flex; gap: 6px; margin: 10px 0;">
+                    <button class="active" onclick="setBulkType('oneToMany')" id="oneToManyBtn" style="flex: 1; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        1 → Many
+                    </button>
+                    <button onclick="setBulkType('manyToOne')" id="manyToOneBtn" style="flex: 1; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; background: white; color: #666; border: 1px solid #ddd;">
+                        Many → 1
+                    </button>
+                    <button onclick="setBulkType('manyToMany')" id="manyToManyBtn" style="flex: 1; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; background: white; color: #666; border: 1px solid #ddd;">
+                        Many → Many
+                    </button>
+                </div>
+
+                <div class="info-box" id="bulkTypeInfo">
+                    <i class="fas fa-info-circle"></i> One player pays multiple players
+                </div>
+
+                <!-- Payers Selection -->
                 <div class="select-group">
-                    <label>Who is paying?</label>
+                    <label id="payersLabel">Who is paying? (Select one)</label>
                     <div id="bulkPayerOptions"></div>
                 </div>
 
+                <!-- Receivers Selection -->
                 <div class="select-group">
-                    <label>Who receives? (Select multiple)</label>
+                    <label id="payeesLabel">Who receives? (Select multiple)</label>
                     <div id="bulkPayeeOptions"></div>
                 </div>
 
                 <div class="input-group">
-                    <label>Amount per player ($)</label>
+                    <label>Amount per transaction ($)</label>
                     <input type="number" id="bulkAmount" placeholder="250" min="0">
                 </div>
 
@@ -814,8 +833,10 @@
 
         let selectedPayer = null;
         let selectedPayee = null;
+        let selectedBulkPayers = [];
         let selectedBulkPayees = [];
         let transactionMode = 'single'; // 'single' or 'bulk'
+        let bulkType = 'oneToMany'; // 'oneToMany', 'manyToOne', 'manyToMany'
 
         function generateGameId() {
             return 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
@@ -879,7 +900,7 @@
 
         function updateDashboard() {
             document.getElementById('gameTitleHeader').textContent = gameState.name;
-            
+
             const container = document.getElementById('balancesContainer');
             container.innerHTML = gameState.players.map((p, i) => {
                 const isNegative = p.balance < 0;
@@ -894,18 +915,98 @@
             document.getElementById('bankBalanceDisplay').textContent = `$${Math.round(gameState.bank.balance).toLocaleString()}`;
         }
 
+        // ===== BULK TYPE SELECTION =====
+        function setBulkType(type) {
+            bulkType = type;
+
+            // Update button states
+            document.getElementById('oneToManyBtn').style.background = type === 'oneToMany' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 'white';
+            document.getElementById('oneToManyBtn').style.color = type === 'oneToMany' ? 'white' : '#666';
+            document.getElementById('oneToManyBtn').style.border = type === 'oneToMany' ? 'none' : '1px solid #ddd';
+
+            document.getElementById('manyToOneBtn').style.background = type === 'manyToOne' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 'white';
+            document.getElementById('manyToOneBtn').style.color = type === 'manyToOne' ? 'white' : '#666';
+            document.getElementById('manyToOneBtn').style.border = type === 'manyToOne' ? 'none' : '1px solid #ddd';
+
+            document.getElementById('manyToManyBtn').style.background = type === 'manyToMany' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 'white';
+            document.getElementById('manyToManyBtn').style.color = type === 'manyToMany' ? 'white' : '#666';
+            document.getElementById('manyToManyBtn').style.border = type === 'manyToMany' ? 'none' : '1px solid #ddd';
+
+            // Update info text and labels
+            if (type === 'oneToMany') {
+                document.getElementById('bulkTypeInfo').innerHTML = '<i class="fas fa-info-circle"></i> One player pays multiple players';
+                document.getElementById('payersLabel').textContent = 'Who is paying? (Select one)';
+                document.getElementById('payeesLabel').textContent = 'Who receives? (Select multiple)';
+            } else if (type === 'manyToOne') {
+                document.getElementById('bulkTypeInfo').innerHTML = '<i class="fas fa-info-circle"></i> Multiple players pay one player';
+                document.getElementById('payersLabel').textContent = 'Who pays? (Select multiple)';
+                document.getElementById('payeesLabel').textContent = 'Who receives? (Select one)';
+            } else {
+                document.getElementById('bulkTypeInfo').innerHTML = '<i class="fas fa-info-circle"></i> Multiple players pay multiple players (each combination)';
+                document.getElementById('payersLabel').textContent = 'Who pays? (Select multiple)';
+                document.getElementById('payeesLabel').textContent = 'Who receives? (Select multiple)';
+            }
+
+            // Re-render options
+            renderBulkOptions();
+
+            // Clear selections
+            selectedBulkPayers = [];
+            selectedBulkPayees = [];
+            document.getElementById('bulkSummaryPreview').style.display = 'none';
+            document.getElementById('bulkAmount').value = '';
+        }
+
+        function renderBulkOptions() {
+            // Bulk Payers
+            const bulkPayerHtml = gameState.players.map((p, i) => `
+                <div class="checkbox-option" onclick="toggleBulkPayer(${i})">
+                    <input type="checkbox" id="payer_${i}">
+                    <label for="payer_${i}" style="flex: 1; cursor: pointer; margin: 0;">${p.name}</label>
+                </div>
+            `).join('');
+
+            // Add Bank to payers if needed
+            const bankPayerOption = `
+                <div class="checkbox-option" onclick="toggleBulkPayerBank()">
+                    <input type="checkbox" id="payer_bank">
+                    <label for="payer_bank" style="flex: 1; cursor: pointer; margin: 0;">Bank</label>
+                </div>
+            `;
+
+            document.getElementById('bulkPayerOptions').innerHTML = bankPayerOption + bulkPayerHtml;
+
+            // Bulk Payees
+            const bulkPayeeHtml = gameState.players.map((p, i) => `
+                <div class="checkbox-option" onclick="toggleBulkPayee(${i})">
+                    <input type="checkbox" id="payee_${i}">
+                    <label for="payee_${i}" style="flex: 1; cursor: pointer; margin: 0;">${p.name}</label>
+                </div>
+            `).join('');
+
+            // Add Bank to payees if needed
+            const bankPayeeOption = `
+                <div class="checkbox-option" onclick="toggleBulkPayeeBank()">
+                    <input type="checkbox" id="payee_bank">
+                    <label for="payee_bank" style="flex: 1; cursor: pointer; margin: 0;">Bank</label>
+                </div>
+            `;
+
+            document.getElementById('bulkPayeeOptions').innerHTML = bankPayeeOption + bulkPayeeHtml;
+        }
+
         // ===== TRANSACTION MODE =====
         function setTransactionMode(mode) {
             transactionMode = mode;
-            
+
             // Update button states
             document.getElementById('singleModeBtn').classList.toggle('active', mode === 'single');
             document.getElementById('bulkModeBtn').classList.toggle('active', mode === 'bulk');
-            
+
             // Show/hide mode sections
             document.getElementById('singleMode').style.display = mode === 'single' ? 'block' : 'none';
             document.getElementById('bulkMode').style.display = mode === 'bulk' ? 'block' : 'none';
-            
+
             // Update info text
             const infoBox = document.getElementById('modeInfo');
             if (mode === 'single') {
@@ -952,38 +1053,20 @@
                 `).join('')}
             `;
 
-            // Bulk mode options
-            const bulkPayerHtml = `
-                <div class="radio-option" onclick="selectBulkPayer('bank')">
-                    <input type="radio" name="bulkPayer" value="bank">
-                    <span>Bank</span>
-                </div>
-                ${gameState.players.map((p, i) => `
-                    <div class="radio-option" onclick="selectBulkPayer(${i})">
-                        <input type="radio" name="bulkPayer" value="${i}">
-                        <span>${p.name}</span>
-                    </div>
-                `).join('')}
-            `;
-
-            const bulkPayeeHtml = gameState.players.map((p, i) => `
-                <div class="checkbox-option" onclick="toggleBulkPayee(${i})">
-                    <input type="checkbox" id="payee_${i}">
-                    <label for="payee_${i}" style="flex: 1; cursor: pointer; margin: 0;">${p.name}</label>
-                </div>
-            `).join('');
-
             document.getElementById('payerOptions').innerHTML = payerHtml;
             document.getElementById('payeeOptions').innerHTML = payeeHtml;
-            document.getElementById('bulkPayerOptions').innerHTML = bulkPayerHtml;
-            document.getElementById('bulkPayeeOptions').innerHTML = bulkPayeeHtml;
-            
+
+            // Initialize bulk mode
+            bulkType = 'oneToMany';
+            selectedBulkPayers = [];
+            selectedBulkPayees = [];
+            renderBulkOptions();
+
             document.getElementById('transactionAmount').value = '';
             document.getElementById('bulkAmount').value = '';
-            
+
             selectedPayer = null;
             selectedPayee = null;
-            selectedBulkPayees = [];
             document.getElementById('summaryPreview').style.display = 'none';
             document.getElementById('bulkSummaryPreview').style.display = 'none';
 
@@ -1000,8 +1083,78 @@
             updateSummary();
         }
 
-        function selectBulkPayer(value) {
-            selectedPayer = value;
+        function toggleBulkPayerBank() {
+            const checkbox = document.getElementById('payer_bank');
+            const option = checkbox.parentElement;
+
+            if (selectedBulkPayers.includes('bank')) {
+                selectedBulkPayers = selectedBulkPayers.filter(p => p !== 'bank');
+                checkbox.checked = false;
+                option.classList.remove('selected');
+            } else {
+                selectedBulkPayers = ['bank']; // Only one payer for oneToMany mode
+                document.querySelectorAll('input[id^="payer_"]').forEach(cb => {
+                    cb.checked = false;
+                    cb.parentElement.classList.remove('selected');
+                });
+                checkbox.checked = true;
+                option.classList.add('selected');
+            }
+
+            updateBulkSummary();
+        }
+
+        function toggleBulkPayer(index) {
+            const checkbox = document.getElementById('payer_' + index);
+            const option = checkbox.parentElement;
+
+            if (selectedBulkPayers.includes(index)) {
+                selectedBulkPayers = selectedBulkPayers.filter(i => i !== index);
+                checkbox.checked = false;
+                option.classList.remove('selected');
+            } else {
+                selectedBulkPayers.push(index);
+                checkbox.checked = true;
+                option.classList.add('selected');
+            }
+
+            // If bulkType is oneToMany, keep only one payer
+            if (bulkType === 'oneToMany' && selectedBulkPayers.length > 1) {
+                selectedBulkPayers = [index];
+                document.querySelectorAll('input[id^="payer_"]').forEach((cb, idx) => {
+                    if (idx !== index + 1) { // +1 because bank option is first
+                        cb.checked = false;
+                        cb.parentElement.classList.remove('selected');
+                    }
+                });
+            }
+
+            updateBulkSummary();
+        }
+
+        function toggleBulkPayeeBank() {
+            const checkbox = document.getElementById('payee_bank');
+            const option = checkbox.parentElement;
+
+            if (selectedBulkPayees.includes('bank')) {
+                selectedBulkPayees = selectedBulkPayees.filter(p => p !== 'bank');
+                checkbox.checked = false;
+                option.classList.remove('selected');
+            } else {
+                if (bulkType === 'manyToOne') {
+                    // Clear other selections for manyToOne
+                    selectedBulkPayees = ['bank'];
+                    document.querySelectorAll('input[id^="payee_"]').forEach(cb => {
+                        cb.checked = false;
+                        cb.parentElement.classList.remove('selected');
+                    });
+                } else {
+                    selectedBulkPayees.push('bank');
+                }
+                checkbox.checked = true;
+                option.classList.add('selected');
+            }
+
             updateBulkSummary();
         }
 
@@ -1014,7 +1167,17 @@
                 checkbox.checked = false;
                 option.classList.remove('selected');
             } else {
-                selectedBulkPayees.push(index);
+                if (bulkType === 'manyToOne') {
+                    // Clear other selections for manyToOne
+                    selectedBulkPayees = [index];
+                    document.querySelectorAll('input[id^="payee_"]').forEach((cb, idx) => {
+                        cb.checked = false;
+                        cb.parentElement.classList.remove('selected');
+                    });
+                    document.getElementById('payee_bank').parentElement.classList.remove('selected');
+                } else {
+                    selectedBulkPayees.push(index);
+                }
                 checkbox.checked = true;
                 option.classList.add('selected');
             }
@@ -1048,33 +1211,86 @@
         function updateBulkSummary() {
             const amount = parseFloat(document.getElementById('bulkAmount').value) || 0;
 
-            if (selectedPayer === null || selectedBulkPayees.length === 0) {
+            if (selectedBulkPayers.length === 0 || selectedBulkPayees.length === 0) {
                 document.getElementById('bulkSummaryPreview').style.display = 'none';
                 return;
             }
 
-            const totalAmount = amount * selectedBulkPayees.length;
-            const bulkList = selectedBulkPayees.map(i => {
-                const payeeName = gameState.players[i].name;
-                const payerName = selectedPayer === 'bank' ? 'Bank' : gameState.players[selectedPayer].name;
-                return `
-                    <div class="bulk-transaction-preview">
-                        <span class="from">${payerName}</span> → <span class="to">${payeeName}</span> <span class="amount">$${Math.round(amount).toLocaleString()}</span>
-                    </div>
-                `;
-            }).join('');
+            let transactions = [];
+            let totalAmount = 0;
+            let hasNegativeBalance = false;
 
-            document.getElementById('bulkTxCount').textContent = selectedBulkPayees.length;
+            if (bulkType === 'oneToMany') {
+                // One payer pays multiple payees
+                const payer = selectedBulkPayers[0];
+                const payerName = payer === 'bank' ? 'Bank' : gameState.players[payer].name;
+                const payerBalance = payer === 'bank' ? gameState.bank.balance : gameState.players[payer].balance;
+
+                selectedBulkPayees.forEach(payeeIdx => {
+                    const payeeName = payeeIdx === 'bank' ? 'Bank' : gameState.players[payeeIdx].name;
+                    transactions.push({
+                        from: payerName,
+                        to: payeeName,
+                        amount: amount
+                    });
+                    totalAmount += amount;
+                });
+
+                if (payerBalance - totalAmount < 0) hasNegativeBalance = true;
+
+            } else if (bulkType === 'manyToOne') {
+                // Multiple payers pay one payee
+                const payee = selectedBulkPayees[0];
+                const payeeName = payee === 'bank' ? 'Bank' : gameState.players[payee].name;
+
+                selectedBulkPayers.forEach(payerIdx => {
+                    const payerName = payerIdx === 'bank' ? 'Bank' : gameState.players[payerIdx].name;
+                    const payerBalance = payerIdx === 'bank' ? gameState.bank.balance : gameState.players[payerIdx].balance;
+
+                    transactions.push({
+                        from: payerName,
+                        to: payeeName,
+                        amount: amount
+                    });
+                    totalAmount += amount;
+
+                    if (payerBalance - amount < 0) hasNegativeBalance = true;
+                });
+
+            } else if (bulkType === 'manyToMany') {
+                // Each payer pays each payee (cross-product)
+                selectedBulkPayers.forEach(payerIdx => {
+                    const payerName = payerIdx === 'bank' ? 'Bank' : gameState.players[payerIdx].name;
+                    const payerBalance = payerIdx === 'bank' ? gameState.bank.balance : gameState.players[payerIdx].balance;
+                    const txPerPayer = selectedBulkPayees.length * amount;
+
+                    selectedBulkPayees.forEach(payeeIdx => {
+                        const payeeName = payeeIdx === 'bank' ? 'Bank' : gameState.players[payeeIdx].name;
+                        transactions.push({
+                            from: payerName,
+                            to: payeeName,
+                            amount: amount
+                        });
+                        totalAmount += amount;
+                    });
+
+                    if (payerBalance - txPerPayer < 0) hasNegativeBalance = true;
+                });
+            }
+
+            const bulkList = transactions.map(tx => `
+                <div class="bulk-transaction-preview">
+                    <span class="from">${tx.from}</span> → <span class="to">${tx.to}</span> <span class="amount">$${Math.round(tx.amount).toLocaleString()}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('bulkTxCount').textContent = transactions.length;
             document.getElementById('bulkTotalAmount').textContent = `$${Math.round(totalAmount).toLocaleString()}`;
             document.getElementById('bulkTransactionsList').innerHTML = bulkList;
             document.getElementById('bulkSummaryPreview').style.display = 'block';
 
-            // Check for negative balances
-            const payerBalance = selectedPayer === 'bank' ? gameState.bank.balance : gameState.players[selectedPayer].balance;
-            const newPayerBalance = payerBalance - totalAmount;
-            
             const warningSection = document.getElementById('bulkWarningSection');
-            if (newPayerBalance < 0) {
+            if (hasNegativeBalance) {
                 warningSection.style.display = 'block';
             } else {
                 warningSection.style.display = 'none';
@@ -1148,37 +1364,106 @@
                 return;
             }
 
-            if (selectedPayer === null || selectedBulkPayees.length === 0) {
-                alert('Please select payer and at least one receiver');
+            if (selectedBulkPayers.length === 0 || selectedBulkPayees.length === 0) {
+                alert('Please select payers and receivers');
                 return;
             }
 
-            const payerName = selectedPayer === 'bank' ? 'Bank' : gameState.players[selectedPayer].name;
-            const totalAmount = amount * selectedBulkPayees.length;
+            if (bulkType === 'oneToMany') {
+                // One payer pays multiple payees
+                const payer = selectedBulkPayers[0];
+                const payerName = payer === 'bank' ? 'Bank' : gameState.players[payer].name;
+                const totalAmount = amount * selectedBulkPayees.length;
 
-            // Calculate new payer balance
-            let payerBalance = selectedPayer === 'bank' ? gameState.bank.balance : gameState.players[selectedPayer].balance;
-            let newPayerBalance = payerBalance - totalAmount;
-
-            // Process each transaction
-            selectedBulkPayees.forEach(payeeIndex => {
-                if (selectedPayer === 'bank') {
-                    gameState.bank.balance -= amount;
+                // Update payer balance
+                if (payer === 'bank') {
+                    gameState.bank.balance -= totalAmount;
                 } else {
-                    gameState.players[selectedPayer].balance -= amount;
+                    gameState.players[payer].balance -= totalAmount;
                 }
 
-                gameState.players[payeeIndex].balance += amount;
+                // Update each payee and create transactions
+                selectedBulkPayees.forEach(payeeIdx => {
+                    if (payeeIdx === 'bank') {
+                        gameState.bank.balance += amount;
+                    } else {
+                        gameState.players[payeeIdx].balance += amount;
+                    }
 
-                const payeeName = gameState.players[payeeIndex].name;
+                    const payeeName = payeeIdx === 'bank' ? 'Bank' : gameState.players[payeeIdx].name;
 
-                gameState.transactions.push({
-                    payer: payerName,
-                    payee: payeeName,
-                    amount,
-                    time: new Date().toLocaleString()
+                    gameState.transactions.push({
+                        payer: payerName,
+                        payee: payeeName,
+                        amount,
+                        time: new Date().toLocaleString()
+                    });
                 });
-            });
+
+            } else if (bulkType === 'manyToOne') {
+                // Multiple payers pay one payee
+                const payee = selectedBulkPayees[0];
+                const payeeName = payee === 'bank' ? 'Bank' : gameState.players[payee].name;
+
+                // Update each payer and create transactions
+                selectedBulkPayers.forEach(payerIdx => {
+                    const payerName = payerIdx === 'bank' ? 'Bank' : gameState.players[payerIdx].name;
+
+                    // Update payer balance
+                    if (payerIdx === 'bank') {
+                        gameState.bank.balance -= amount;
+                    } else {
+                        gameState.players[payerIdx].balance -= amount;
+                    }
+
+                    // Update payee balance
+                    if (payee === 'bank') {
+                        gameState.bank.balance += amount;
+                    } else {
+                        gameState.players[payee].balance += amount;
+                    }
+
+                    gameState.transactions.push({
+                        payer: payerName,
+                        payee: payeeName,
+                        amount,
+                        time: new Date().toLocaleString()
+                    });
+                });
+
+            } else if (bulkType === 'manyToMany') {
+                // Each payer pays each payee
+                selectedBulkPayers.forEach(payerIdx => {
+                    const payerName = payerIdx === 'bank' ? 'Bank' : gameState.players[payerIdx].name;
+                    const txPerPayer = selectedBulkPayees.length * amount;
+
+                    // Update payer balance
+                    if (payerIdx === 'bank') {
+                        gameState.bank.balance -= txPerPayer;
+                    } else {
+                        gameState.players[payerIdx].balance -= txPerPayer;
+                    }
+
+                    // Pay each payee
+                    selectedBulkPayees.forEach(payeeIdx => {
+                        const payeeName = payeeIdx === 'bank' ? 'Bank' : gameState.players[payeeIdx].name;
+
+                        // Update payee balance
+                        if (payeeIdx === 'bank') {
+                            gameState.bank.balance += amount;
+                        } else {
+                            gameState.players[payeeIdx].balance += amount;
+                        }
+
+                        gameState.transactions.push({
+                            payer: payerName,
+                            payee: payeeName,
+                            amount,
+                            time: new Date().toLocaleString()
+                        });
+                    });
+                });
+            }
 
             saveGameToStorage(gameState);
             closeTransactionModal();
