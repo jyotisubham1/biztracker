@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business International Money Tracker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .screen {
+            display: none;
+            padding: 20px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .button {
+            width: 100%;
+            padding: 14px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .button-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .button-secondary {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .button-secondary:hover {
+            background: #e8e8e8;
+        }
+        
+        .button-small {
+            padding: 8px 12px;
+            font-size: 14px;
+            margin: 5px;
+        }
+        
+        .button-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .button-success {
+            background: #51cf66;
+            color: white;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .player-card {
+            background: #f9f9f9;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 20px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 1px solid #e0d5f0;
+            text-align: center;
+        }
+        
+        .balance-card.bank {
+            background: linear-gradient(135deg, rgba(51, 200, 100, 0.1) 0%, rgba(40, 150, 80, 0.1) 100%);
+            border-color: #d5f0e0;
+        }
+        
+        .balance-card.negative {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(200, 50, 50, 0.1) 100%);
+            border-color: #f0d5d5;
+        }
+        
+        .balance-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .balance-card.negative .balance-amount {
+            color: #ff6b6b;
+        }
+        
+        .balance-card.bank .balance-amount {
+            color: #2d9e5e;
+        }
+        
+        .transaction-item {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-from {
+            font-weight: 500;
+            color: #667eea;
+        }
+        
+        .transaction-amount {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+        
+        .transaction-to {
+            font-weight: 500;
+            color: #2d9e5e;
+        }
+        
+        .transaction-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            max-width: 380px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+        
+        .modal-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .select-group {
+            margin: 15px 0;
+        }
+        
+        .select-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        
+        .radio-option:hover {
+            background: #f5f5f5;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .radio-option.selected {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .checkbox-option:hover {
+            background: #f5f5f5;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-option.selected {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+        
+        .summary-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .summary-label {
+            color: #666;
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #856404;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 20px 0 12px 0;
+        }
+        
+        .action-bar {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .action-bar .button {
+            flex: 1;
+            margin: 0;
+        }
+        
+        .close-btn {
+            float: right;
+            background: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .saved-games-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+
+        .saved-game-card {
+            background: #f9f9f9;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .saved-game-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .saved-game-info {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .saved-game-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .saved-game-actions button {
+            flex: 1;
+            padding: 6px;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .storage-info {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #1565c0;
+            margin: 15px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            margin-left: 6px;
+        }
+
+        .badge.new {
+            background: #51cf66;
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .mode-toggle button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            background: white;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .transaction-list {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .bulk-transaction-preview {
+            background: white;
+            padding: 8px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            font-size: 13px;
+        }
+
+        .bulk-transaction-preview .from {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .bulk-transaction-preview .to {
+            color: #2d9e5e;
+            font-weight: 500;
+        }
+
+        .bulk-transaction-preview .amount {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #1565c0;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div class="screen active" id="homeScreen">
+            <div class="header">
+                <h1>🎲 Business International</h1>
+                <p>Money Tracker</p>
+            </div>
+            <div style="padding: 40px 20px; text-align: center;">
+                <div style="font-size: 60px; margin: 30px 0;">💰</div>
+                <p style="font-size: 16px; color: #666; margin-bottom: 20px;">Track player balances in real-time</p>
+                <div class="storage-info">
+                    <i class="fas fa-info-circle"></i> Games save automatically on this device
+                </div>
+                <button class="button button-primary" onclick="goToScreen('setupScreen')">
+                    <i class="fas fa-play"></i> Start New Game
+                </button>
+                <button class="button button-secondary" onclick="goToScreen('savedGamesScreen')">
+                    <i class="fas fa-folder-open"></i> Load Saved Game
+                </button>
+                <button class="button button-secondary" onclick="loadDemo()">
+                    <i class="fas fa-star"></i> Try Demo
+                </button>
+            </div>
+        </div>
+
+        <!-- Saved Games Screen -->
+        <div class="screen" id="savedGamesScreen">
+            <div class="header">
+                <h1>Saved Games</h1>
+                <p id="savedGamesCount">0 games</p>
+            </div>
+            <div style="padding: 20px;">
+                <div id="savedGamesList" class="saved-games-list">
+                    <div style="text-align: center; color: #999; padding: 40px 20px;">
+                        <i class="fas fa-inbox" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No saved games yet</p>
+                    </div>
+                </div>
+                <button class="button button-secondary" onclick="goToScreen('homeScreen')">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Player Setup Screen -->
+        <div class="screen" id="setupScreen">
+            <div class="header">
+                <h1>Game Setup</h1>
+                <p>Add players and set starting balance</p>
+            </div>
+            <div style="padding: 20px;">
+                <div class="input-group">
+                    <label>Game Name</label>
+                    <input type="text" id="gameName" placeholder="e.g., Sunday Game" value="Game 1">
+                </div>
+
+                <div class="input-group">
+                    <label>Bank Starting Balance</label>
+                    <input type="number" id="bankBalance" value="50000" placeholder="Enter bank balance">
+                </div>
+
+                <div class="section-title">Players</div>
+                <div id="playersList" style="min-height: 100px; margin-bottom: 15px;"></div>
+
+                <div class="input-group">
+                    <label>Player Name</label>
+                    <input type="text" id="newPlayerName" placeholder="Enter player name">
+                </div>
+                
+                <div class="input-group">
+                    <label>Starting Balance</label>
+                    <input type="number" id="newPlayerBalance" value="5000" placeholder="5000">
+                </div>
+
+                <button class="button button-secondary" onclick="addPlayer()">
+                    <i class="fas fa-plus"></i> Add Player
+                </button>
+
+                <button class="button button-primary" onclick="startGame()" style="margin-top: 20px;">
+                    <i class="fas fa-arrow-right"></i> Start Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div class="screen" id="dashboardScreen">
+            <div class="header">
+                <h1 id="gameTitleHeader">Game Dashboard</h1>
+                <p id="gameStatus">Active</p>
+            </div>
+            <div style="padding: 20px;">
+                <div class="balance-card bank">
+                    <div class="balance-label">Bank Balance</div>
+                    <div class="balance-amount" id="bankBalanceDisplay">$50,000</div>
+                </div>
+
+                <div class="section-title">Player Balances</div>
+                <div id="balancesContainer" style="margin-bottom: 20px;"></div>
+
+                <div class="action-bar">
+                    <button class="button button-primary" onclick="openTransactionModal()">
+                        <i class="fas fa-exchange-alt"></i> Record Payment
+                    </button>
+                </div>
+
+                <div class="action-bar">
+                    <button class="button button-secondary" onclick="goToScreen('historyScreen')">
+                        <i class="fas fa-history"></i> History
+                    </button>
+                    <button class="button button-secondary" onclick="undoLastTransaction()">
+                        <i class="fas fa-undo"></i> Undo
+                    </button>
+                </div>
+
+                <div class="action-bar">
+                    <button class="button button-secondary" onclick="resetGame()" style="background: #ffe0e0; color: #d32f2f;">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                    <button class="button button-secondary" onclick="goToScreen('homeScreen')">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Screen -->
+        <div class="screen" id="historyScreen">
+            <div class="header">
+                <h1>Transaction History</h1>
+                <p id="transactionCount">0 transactions</p>
+            </div>
+            <div style="padding: 0;">
+                <div id="transactionsList" style="background: white;">
+                    <div style="padding: 40px 20px; text-align: center; color: #999;">
+                        <i class="fas fa-inbox" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No transactions yet</p>
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 20px;">
+                <button class="button button-secondary" onclick="goToScreen('dashboardScreen')">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Modal -->
+    <div class="modal-overlay" id="transactionModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeTransactionModal()">×</button>
+            <div class="modal-header">Record Payment</div>
+            
+            <!-- Mode Toggle: Single vs Bulk -->
+            <div class="mode-toggle">
+                <button class="active" onclick="setTransactionMode('single')" id="singleModeBtn">
+                    <i class="fas fa-user"></i> Single
+                </button>
+                <button onclick="setTransactionMode('bulk')" id="bulkModeBtn">
+                    <i class="fas fa-users"></i> Bulk <span class="badge">New</span>
+                </button>
+            </div>
+
+            <div class="info-box" id="modeInfo">
+                <i class="fas fa-info-circle"></i> Pay or receive from one player
+            </div>
+
+            <!-- SINGLE MODE -->
+            <div id="singleMode">
+                <div class="select-group">
+                    <label>Who is paying?</label>
+                    <div id="payerOptions"></div>
+                </div>
+
+                <div class="select-group">
+                    <label>Who receives?</label>
+                    <div id="payeeOptions"></div>
+                </div>
+
+                <div class="input-group">
+                    <label>Amount ($)</label>
+                    <input type="number" id="transactionAmount" placeholder="250" min="0">
+                </div>
+
+                <div id="summaryPreview" style="display: none;">
+                    <div class="summary-box">
+                        <div class="summary-row">
+                            <span class="summary-label" id="summaryPayer">Player 1</span>
+                            <span class="summary-label">→</span>
+                            <span class="summary-label" id="summaryPayee">Player 2</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Amount:</span>
+                            <span class="summary-value" id="summaryAmount">$0</span>
+                        </div>
+                        <div id="warningSection" style="display: none;">
+                            <div class="warning-box">
+                                <i class="fas fa-exclamation-triangle"></i> This will result in a negative balance!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BULK MODE -->
+            <div id="bulkMode" style="display: none;">
+                <div class="select-group">
+                    <label>Who is paying?</label>
+                    <div id="bulkPayerOptions"></div>
+                </div>
+
+                <div class="select-group">
+                    <label>Who receives? (Select multiple)</label>
+                    <div id="bulkPayeeOptions"></div>
+                </div>
+
+                <div class="input-group">
+                    <label>Amount per player ($)</label>
+                    <input type="number" id="bulkAmount" placeholder="250" min="0">
+                </div>
+
+                <div id="bulkSummaryPreview" style="display: none;">
+                    <div class="summary-box">
+                        <div class="summary-row">
+                            <span class="summary-label">Transactions:</span>
+                            <span class="summary-value" id="bulkTxCount">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">Total Amount:</span>
+                            <span class="summary-value" id="bulkTotalAmount">$0</span>
+                        </div>
+                    </div>
+                    <div class="transaction-list" id="bulkTransactionsList"></div>
+                    <div id="bulkWarningSection" style="display: none;">
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle"></i> Some transactions will result in negative balances!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="button button-danger" onclick="closeTransactionModal()">Cancel</button>
+                <button class="button button-primary" id="confirmBtn" onclick="confirmTransaction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== STORAGE FUNCTIONS =====
+        const STORAGE_KEY_PREFIX = 'business_intl_game_';
+        const GAMES_INDEX_KEY = 'business_intl_games_index';
+
+        function saveGameToStorage(gameState) {
+            const key = STORAGE_KEY_PREFIX + gameState.id;
+            localStorage.setItem(key, JSON.stringify(gameState));
+            updateGamesIndex();
+        }
+
+        function loadGameFromStorage(gameId) {
+            const key = STORAGE_KEY_PREFIX + gameId;
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : null;
+        }
+
+        function getAllSavedGames() {
+            const index = JSON.parse(localStorage.getItem(GAMES_INDEX_KEY) || '[]');
+            return index.map(gameId => loadGameFromStorage(gameId)).filter(g => g);
+        }
+
+        function deleteSavedGame(gameId) {
+            localStorage.removeItem(STORAGE_KEY_PREFIX + gameId);
+            updateGamesIndex();
+        }
+
+        function updateGamesIndex() {
+            const keys = Object.keys(localStorage);
+            const gameIds = keys
+                .filter(k => k.startsWith(STORAGE_KEY_PREFIX))
+                .map(k => k.replace(STORAGE_KEY_PREFIX, ''));
+            localStorage.setItem(GAMES_INDEX_KEY, JSON.stringify(gameIds));
+        }
+
+        // ===== GAME STATE =====
+        let gameState = {
+            id: null,
+            name: 'Game 1',
+            bank: { balance: 50000 },
+            players: [],
+            transactions: [],
+            createdAt: null
+        };
+
+        let selectedPayer = null;
+        let selectedPayee = null;
+        let selectedBulkPayees = [];
+        let transactionMode = 'single'; // 'single' or 'bulk'
+
+        function generateGameId() {
+            return 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            if (screenId === 'dashboardScreen') updateDashboard();
+            if (screenId === 'historyScreen') updateHistory();
+            if (screenId === 'savedGamesScreen') showSavedGames();
+        }
+
+        function addPlayer() {
+            const name = document.getElementById('newPlayerName').value.trim();
+            const balance = parseFloat(document.getElementById('newPlayerBalance').value) || 5000;
+
+            if (!name) {
+                alert('Please enter player name');
+                return;
+            }
+
+            gameState.players.push({ name, balance, startingBalance: balance });
+            renderPlayersList();
+
+            document.getElementById('newPlayerName').value = '';
+            document.getElementById('newPlayerBalance').value = '5000';
+        }
+
+        function renderPlayersList() {
+            const list = document.getElementById('playersList');
+            list.innerHTML = gameState.players.map((p, i) => `
+                <div class="player-card">
+                    <span>${p.name}</span>
+                    <button class="button button-small button-danger" onclick="removePlayer(${i})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function removePlayer(index) {
+            gameState.players.splice(index, 1);
+            renderPlayersList();
+        }
+
+        function startGame() {
+            gameState.id = generateGameId();
+            gameState.name = document.getElementById('gameName').value || 'Game 1';
+            gameState.bank.balance = parseFloat(document.getElementById('bankBalance').value) || 50000;
+            gameState.bank.startingBalance = gameState.bank.balance;
+            gameState.createdAt = new Date().toLocaleString();
+            gameState.transactions = [];
+
+            if (gameState.players.length < 2) {
+                alert('Please add at least 2 players');
+                return;
+            }
+
+            saveGameToStorage(gameState);
+            goToScreen('dashboardScreen');
+        }
+
+        function updateDashboard() {
+            document.getElementById('gameTitleHeader').textContent = gameState.name;
+            
+            const container = document.getElementById('balancesContainer');
+            container.innerHTML = gameState.players.map((p, i) => {
+                const isNegative = p.balance < 0;
+                return `
+                    <div class="balance-card ${isNegative ? 'negative' : ''}">
+                        <div class="balance-label">${p.name}</div>
+                        <div class="balance-amount">$${Math.round(p.balance).toLocaleString()}</div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('bankBalanceDisplay').textContent = `$${Math.round(gameState.bank.balance).toLocaleString()}`;
+        }
+
+        // ===== TRANSACTION MODE =====
+        function setTransactionMode(mode) {
+            transactionMode = mode;
+            
+            // Update button states
+            document.getElementById('singleModeBtn').classList.toggle('active', mode === 'single');
+            document.getElementById('bulkModeBtn').classList.toggle('active', mode === 'bulk');
+            
+            // Show/hide mode sections
+            document.getElementById('singleMode').style.display = mode === 'single' ? 'block' : 'none';
+            document.getElementById('bulkMode').style.display = mode === 'bulk' ? 'block' : 'none';
+            
+            // Update info text
+            const infoBox = document.getElementById('modeInfo');
+            if (mode === 'single') {
+                infoBox.innerHTML = '<i class="fas fa-info-circle"></i> Pay or receive from one player';
+            } else {
+                infoBox.innerHTML = '<i class="fas fa-info-circle"></i> Pay one player or receive from multiple players';
+            }
+
+            // Clear selections
+            selectedPayer = null;
+            selectedPayee = null;
+            selectedBulkPayees = [];
+            document.getElementById('summaryPreview').style.display = 'none';
+            document.getElementById('bulkSummaryPreview').style.display = 'none';
+        }
+
+        function openTransactionModal() {
+            transactionMode = 'single';
+            setTransactionMode('single');
+
+            const payerHtml = `
+                <div class="radio-option" onclick="selectPayer('bank')">
+                    <input type="radio" name="payer" value="bank">
+                    <span>Bank</span>
+                </div>
+                ${gameState.players.map((p, i) => `
+                    <div class="radio-option" onclick="selectPayer(${i})">
+                        <input type="radio" name="payer" value="${i}">
+                        <span>${p.name}</span>
+                    </div>
+                `).join('')}
+            `;
+
+            const payeeHtml = `
+                <div class="radio-option" onclick="selectPayee('bank')">
+                    <input type="radio" name="payee" value="bank">
+                    <span>Bank</span>
+                </div>
+                ${gameState.players.map((p, i) => `
+                    <div class="radio-option" onclick="selectPayee(${i})">
+                        <input type="radio" name="payee" value="${i}">
+                        <span>${p.name}</span>
+                    </div>
+                `).join('')}
+            `;
+
+            // Bulk mode options
+            const bulkPayerHtml = `
+                <div class="radio-option" onclick="selectBulkPayer('bank')">
+                    <input type="radio" name="bulkPayer" value="bank">
+                    <span>Bank</span>
+                </div>
+                ${gameState.players.map((p, i) => `
+                    <div class="radio-option" onclick="selectBulkPayer(${i})">
+                        <input type="radio" name="bulkPayer" value="${i}">
+                        <span>${p.name}</span>
+                    </div>
+                `).join('')}
+            `;
+
+            const bulkPayeeHtml = gameState.players.map((p, i) => `
+                <div class="checkbox-option" onclick="toggleBulkPayee(${i})">
+                    <input type="checkbox" id="payee_${i}">
+                    <label for="payee_${i}" style="flex: 1; cursor: pointer; margin: 0;">${p.name}</label>
+                </div>
+            `).join('');
+
+            document.getElementById('payerOptions').innerHTML = payerHtml;
+            document.getElementById('payeeOptions').innerHTML = payeeHtml;
+            document.getElementById('bulkPayerOptions').innerHTML = bulkPayerHtml;
+            document.getElementById('bulkPayeeOptions').innerHTML = bulkPayeeHtml;
+            
+            document.getElementById('transactionAmount').value = '';
+            document.getElementById('bulkAmount').value = '';
+            
+            selectedPayer = null;
+            selectedPayee = null;
+            selectedBulkPayees = [];
+            document.getElementById('summaryPreview').style.display = 'none';
+            document.getElementById('bulkSummaryPreview').style.display = 'none';
+
+            document.getElementById('transactionModal').classList.add('active');
+        }
+
+        function selectPayer(value) {
+            selectedPayer = value;
+            updateSummary();
+        }
+
+        function selectPayee(value) {
+            selectedPayee = value;
+            updateSummary();
+        }
+
+        function selectBulkPayer(value) {
+            selectedPayer = value;
+            updateBulkSummary();
+        }
+
+        function toggleBulkPayee(index) {
+            const checkbox = document.getElementById('payee_' + index);
+            const option = checkbox.parentElement;
+
+            if (selectedBulkPayees.includes(index)) {
+                selectedBulkPayees = selectedBulkPayees.filter(i => i !== index);
+                checkbox.checked = false;
+                option.classList.remove('selected');
+            } else {
+                selectedBulkPayees.push(index);
+                checkbox.checked = true;
+                option.classList.add('selected');
+            }
+
+            updateBulkSummary();
+        }
+
+        function updateSummary() {
+            const amount = parseFloat(document.getElementById('transactionAmount').value) || 0;
+
+            if (selectedPayer === null || selectedPayee === null) return;
+
+            const payerName = selectedPayer === 'bank' ? 'Bank' : gameState.players[selectedPayer].name;
+            const payeeName = selectedPayee === 'bank' ? 'Bank' : gameState.players[selectedPayee].name;
+            const payerBalance = selectedPayer === 'bank' ? gameState.bank.balance : gameState.players[selectedPayer].balance;
+            const newPayerBalance = payerBalance - amount;
+
+            document.getElementById('summaryPayer').textContent = payerName;
+            document.getElementById('summaryPayee').textContent = payeeName;
+            document.getElementById('summaryAmount').textContent = `$${Math.round(amount).toLocaleString()}`;
+            document.getElementById('summaryPreview').style.display = 'block';
+
+            const warningSection = document.getElementById('warningSection');
+            if (newPayerBalance < 0) {
+                warningSection.style.display = 'block';
+            } else {
+                warningSection.style.display = 'none';
+            }
+        }
+
+        function updateBulkSummary() {
+            const amount = parseFloat(document.getElementById('bulkAmount').value) || 0;
+
+            if (selectedPayer === null || selectedBulkPayees.length === 0) {
+                document.getElementById('bulkSummaryPreview').style.display = 'none';
+                return;
+            }
+
+            const totalAmount = amount * selectedBulkPayees.length;
+            const bulkList = selectedBulkPayees.map(i => {
+                const payeeName = gameState.players[i].name;
+                const payerName = selectedPayer === 'bank' ? 'Bank' : gameState.players[selectedPayer].name;
+                return `
+                    <div class="bulk-transaction-preview">
+                        <span class="from">${payerName}</span> → <span class="to">${payeeName}</span> <span class="amount">$${Math.round(amount).toLocaleString()}</span>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('bulkTxCount').textContent = selectedBulkPayees.length;
+            document.getElementById('bulkTotalAmount').textContent = `$${Math.round(totalAmount).toLocaleString()}`;
+            document.getElementById('bulkTransactionsList').innerHTML = bulkList;
+            document.getElementById('bulkSummaryPreview').style.display = 'block';
+
+            // Check for negative balances
+            const payerBalance = selectedPayer === 'bank' ? gameState.bank.balance : gameState.players[selectedPayer].balance;
+            const newPayerBalance = payerBalance - totalAmount;
+            
+            const warningSection = document.getElementById('bulkWarningSection');
+            if (newPayerBalance < 0) {
+                warningSection.style.display = 'block';
+            } else {
+                warningSection.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('transactionAmount').addEventListener('input', updateSummary);
+            document.getElementById('bulkAmount').addEventListener('input', updateBulkSummary);
+        });
+
+        function confirmTransaction() {
+            if (transactionMode === 'single') {
+                confirmSingleTransaction();
+            } else {
+                confirmBulkTransaction();
+            }
+        }
+
+        function confirmSingleTransaction() {
+            const amount = parseFloat(document.getElementById('transactionAmount').value);
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            if (selectedPayer === null || selectedPayee === null) {
+                alert('Please select both payer and payee');
+                return;
+            }
+
+            if (selectedPayer === selectedPayee) {
+                alert('Payer and payee must be different');
+                return;
+            }
+
+            // Process transaction
+            if (selectedPayer === 'bank') {
+                gameState.bank.balance -= amount;
+            } else {
+                gameState.players[selectedPayer].balance -= amount;
+            }
+
+            if (selectedPayee === 'bank') {
+                gameState.bank.balance += amount;
+            } else {
+                gameState.players[selectedPayee].balance += amount;
+            }
+
+            const payerName = selectedPayer === 'bank' ? 'Bank' : gameState.players[selectedPayer].name;
+            const payeeName = selectedPayee === 'bank' ? 'Bank' : gameState.players[selectedPayee].name;
+
+            gameState.transactions.push({
+                payer: payerName,
+                payee: payeeName,
+                amount,
+                time: new Date().toLocaleString()
+            });
+
+            saveGameToStorage(gameState);
+            closeTransactionModal();
+            updateDashboard();
+        }
+
+        function confirmBulkTransaction() {
+            const amount = parseFloat(document.getElementById('bulkAmount').value);
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            if (selectedPayer === null || selectedBulkPayees.length === 0) {
+                alert('Please select payer and at least one receiver');
+                return;
+            }
+
+            const payerName = selectedPayer === 'bank' ? 'Bank' : gameState.players[selectedPayer].name;
+            const totalAmount = amount * selectedBulkPayees.length;
+
+            // Calculate new payer balance
+            let payerBalance = selectedPayer === 'bank' ? gameState.bank.balance : gameState.players[selectedPayer].balance;
+            let newPayerBalance = payerBalance - totalAmount;
+
+            // Process each transaction
+            selectedBulkPayees.forEach(payeeIndex => {
+                if (selectedPayer === 'bank') {
+                    gameState.bank.balance -= amount;
+                } else {
+                    gameState.players[selectedPayer].balance -= amount;
+                }
+
+                gameState.players[payeeIndex].balance += amount;
+
+                const payeeName = gameState.players[payeeIndex].name;
+
+                gameState.transactions.push({
+                    payer: payerName,
+                    payee: payeeName,
+                    amount,
+                    time: new Date().toLocaleString()
+                });
+            });
+
+            saveGameToStorage(gameState);
+            closeTransactionModal();
+            updateDashboard();
+        }
+
+        function closeTransactionModal() {
+            document.getElementById('transactionModal').classList.remove('active');
+        }
+
+        function updateHistory() {
+            const list = document.getElementById('transactionsList');
+            if (gameState.transactions.length === 0) {
+                list.innerHTML = `<div style="padding: 40px 20px; text-align: center; color: #999;">
+                    <i class="fas fa-inbox" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <p>No transactions yet</p>
+                </div>`;
+                return;
+            }
+
+            list.innerHTML = gameState.transactions.slice().reverse().map((t, i) => `
+                <div class="transaction-item">
+                    <div>
+                        <span class="transaction-from">${t.payer}</span>
+                        <span style="color: #999;"> → </span>
+                        <span class="transaction-to">${t.payee}</span>
+                        <span class="transaction-amount"> $${Math.round(t.amount).toLocaleString()}</span>
+                    </div>
+                    <div class="transaction-time">${t.time}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('transactionCount').textContent = `${gameState.transactions.length} transactions`;
+        }
+
+        function undoLastTransaction() {
+            if (gameState.transactions.length === 0) {
+                alert('No transactions to undo');
+                return;
+            }
+
+            const lastTx = gameState.transactions.pop();
+
+            // Reverse the transaction
+            if (lastTx.payer === 'Bank') {
+                gameState.bank.balance += lastTx.amount;
+            } else {
+                const payerIndex = gameState.players.findIndex(p => p.name === lastTx.payer);
+                gameState.players[payerIndex].balance += lastTx.amount;
+            }
+
+            if (lastTx.payee === 'Bank') {
+                gameState.bank.balance -= lastTx.amount;
+            } else {
+                const payeeIndex = gameState.players.findIndex(p => p.name === lastTx.payee);
+                gameState.players[payeeIndex].balance -= lastTx.amount;
+            }
+
+            saveGameToStorage(gameState);
+            updateDashboard();
+        }
+
+        function resetGame() {
+            if (confirm('Reset all balances to starting amounts? (keeps transaction history)')) {
+                gameState.players.forEach(p => p.balance = p.startingBalance);
+                gameState.bank.balance = gameState.bank.startingBalance;
+                saveGameToStorage(gameState);
+                updateDashboard();
+            }
+        }
+
+        function loadDemo() {
+            gameState = {
+                id: generateGameId(),
+                name: 'Demo Game',
+                bank: { balance: 50000, startingBalance: 50000 },
+                players: [
+                    { name: 'Alice', balance: 4500, startingBalance: 5000 },
+                    { name: 'Bob', balance: 5500, startingBalance: 5000 },
+                    { name: 'Charlie', balance: 4800, startingBalance: 5000 }
+                ],
+                transactions: [
+                    { payer: 'Alice', payee: 'Bob', amount: 250, time: new Date().toLocaleString() },
+                    { payer: 'Bob', payee: 'Charlie', amount: 500, time: new Date().toLocaleString() },
+                    { payer: 'Charlie', payee: 'Alice', amount: 200, time: new Date().toLocaleString() }
+                ],
+                createdAt: new Date().toLocaleString()
+            };
+            goToScreen('dashboardScreen');
+        }
+
+        function showSavedGames() {
+            const games = getAllSavedGames();
+            const list = document.getElementById('savedGamesList');
+
+            if (games.length === 0) {
+                list.innerHTML = `<div style="text-align: center; color: #999; padding: 40px 20px;">
+                    <i class="fas fa-inbox" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <p>No saved games yet</p>
+                </div>`;
+                document.getElementById('savedGamesCount').textContent = '0 games';
+                return;
+            }
+
+            list.innerHTML = games.map(game => `
+                <div class="saved-game-card">
+                    <div class="saved-game-name">${game.name}</div>
+                    <div class="saved-game-info">
+                        ${game.players.length} players • ${game.transactions.length} transactions
+                        <br>
+                        <span style="font-size: 11px;">${game.createdAt}</span>
+                    </div>
+                    <div class="saved-game-actions">
+                        <button class="button button-primary button-small" onclick="loadGame('${game.id}')">
+                            <i class="fas fa-play"></i> Load
+                        </button>
+                        <button class="button button-danger button-small" onclick="deleteGameConfirm('${game.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('savedGamesCount').textContent = games.length + ' game' + (games.length !== 1 ? 's' : '');
+        }
+
+        function loadGame(gameId) {
+            const game = loadGameFromStorage(gameId);
+            if (game) {
+                gameState = game;
+                goToScreen('dashboardScreen');
+            }
+        }
+
+        function deleteGameConfirm(gameId) {
+            if (confirm('Delete this saved game? This cannot be undone.')) {
+                deleteSavedGame(gameId);
+                showSavedGames();
+            }
+        }
+
+        // Initialize games index on page load
+        updateGamesIndex();
+    </script>
+</body>
+</html>
